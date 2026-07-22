@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0b8f7a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="院長Dashboard" />
+<title>けいた院長Dashboard 3.0</title>
+<style>
+:root{--emerald:#0b8f7a;--emerald2:#16a58f;--ink:#103934;--muted:#69807d;--bg:#eaf8f5;--card:#fff;--danger:#d94b59;--warn:#bf7a1f;--line:#d7ebe7;--shadow:0 12px 32px rgba(13,92,80,.12)}
+*{box-sizing:border-box}html,body{margin:0;background:linear-gradient(180deg,#dff7f1 0,#f8fbfa 45%,#eef8f6 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}body{min-height:100vh}.app{max-width:760px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom))}.head{display:flex;align-items:center;justify-content:space-between;margin:8px 4px 18px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;color:#087968}.title{font-size:27px;font-weight:900;margin-top:4px}.datepill{background:#fff;border:1px solid rgba(11,143,122,.16);border-radius:22px;padding:13px 16px;font-size:19px;font-weight:900;box-shadow:var(--shadow)}
+.tabs{position:sticky;top:calc(8px + env(safe-area-inset-top));z-index:10;background:rgba(244,252,250,.88);backdrop-filter:blur(16px);display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:7px;border:1px solid #d9efea;border-radius:22px;box-shadow:0 8px 24px rgba(17,100,87,.08)}.tab{border:0;background:transparent;border-radius:16px;padding:13px 5px;font-size:15px;font-weight:800;color:var(--muted)}.tab.active{background:#fff;color:var(--emerald);box-shadow:0 4px 14px rgba(11,143,122,.12)}
+.page{display:none;margin-top:18px}.page.active{display:block}.hero{background:linear-gradient(135deg,#047b69,#13a993);color:#fff;border-radius:28px;padding:25px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08);right:-70px;top:-60px}.hero .label{opacity:.78;font-weight:800}.hero .big{font-size:44px;font-weight:950;margin:10px 0 5px;letter-spacing:-.03em}.hero .sub{opacity:.8}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}.card{background:rgba(255,255,255,.94);border:1px solid rgba(11,143,122,.09);border-radius:24px;padding:20px;box-shadow:0 9px 26px rgba(13,92,80,.08)}.card.full{grid-column:1/-1}.metric-label{font-size:14px;color:var(--muted);font-weight:800}.metric{font-size:29px;font-weight:950;margin-top:7px}.positive{color:var(--emerald)}.negative{color:var(--danger)}.zero{color:#81908e}.section-title{font-size:20px;font-weight:950;margin:25px 4px 11px}.form{display:grid;gap:13px}.field label{display:block;color:var(--muted);font-size:13px;font-weight:850;margin:0 0 6px 3px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;font:inherit;color:var(--ink);outline:none}.field textarea{min-height:92px;resize:vertical}.field input:focus,.field textarea:focus{border-color:var(--emerald);box-shadow:0 0 0 4px rgba(11,143,122,.1)}.btn{border:0;border-radius:17px;padding:15px 18px;font-size:16px;font-weight:900}.btn.primary{background:linear-gradient(135deg,var(--emerald2),var(--emerald));color:#fff}.btn.secondary{background:#e8f7f3;color:#067866}.btn.danger{background:#fff0f1;color:var(--danger)}.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.history{display:grid;gap:10px}.history-item{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}.history-date{font-weight:900}.history-main{font-weight:850}.history-sub{font-size:12px;color:var(--muted);margin-top:3px}.history-value{font-weight:950}.bar-chart{height:220px;display:flex;align-items:flex-end;gap:6px;padding:18px 6px 8px;border-bottom:1px solid var(--line)}.bar-wrap{flex:1;min-width:0;text-align:center}.bar{width:100%;min-height:3px;border:0;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#20b9a0,#087867);position:relative}.bar:active{transform:scale(.98)}.bar-label{font-size:10px;color:var(--muted);margin-top:7px}.detailbox{background:#effaf7;border-radius:17px;padding:14px;margin-top:12px;font-size:14px;line-height:1.75}.notice{background:#fff8e7;border:1px solid #f4dfae;border-radius:18px;padding:14px;color:#80601d;font-size:13px;line-height:1.6}.settings-stack{display:grid;gap:12px}.version{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom));transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#153d37;color:#fff;border-radius:18px;padding:12px 18px;font-weight:850;transition:.25s;z-index:50;max-width:88%;text-align:center}.toast.show{transform:translate(-50%,0);opacity:1}.hidden{display:none!important}@media(min-width:620px){.grid{grid-template-columns:repeat(4,1fr)}.card.full{grid-column:1/-1}.form.two{grid-template-columns:1fr 1fr}.field.wide{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="head"><div><div class="eyebrow">HOSPITAL MANAGEMENT</div><div class="title">けいた院長Dashboard</div></div><div class="datepill" id="datePill">--/--</div></header>
+<nav class="tabs" aria-label="メインメニュー">
+<button class="tab active" data-page="today">今日</button><button class="tab" data-page="month">月間</button><button class="tab" data-page="year">年間</button><button class="tab" data-page="settings">設定</button>
+</nav>
+
+<section id="today" class="page active">
+<div class="hero"><div class="label">今日の売上（税抜）</div><div class="big" id="todaySales">¥0</div><div class="sub" id="todayStatus">本日の数字を入力してください</div></div>
+<div class="grid">
+<div class="card"><div class="metric-label">来院件数</div><div class="metric" id="todayVisits">0件</div></div>
+<div class="card"><div class="metric-label">客単価</div><div class="metric" id="todayUnit">¥0</div></div>
+<div class="card"><div class="metric-label">日商達成率</div><div class="metric" id="todayGoalRate">0%</div></div>
+<div class="card"><div class="metric-label">新患</div><div class="metric" id="todayNew">0件</div></div>
+</div>
+<h2 class="section-title">今日の入力</h2>
+<div class="card"><form id="dailyForm" class="form two">
+<div class="field"><label>日付</label><input id="fDate" type="date" required></div>
+<div class="field"><label>売上（税抜・円）</label><input id="fSales" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>来院件数</label><input id="fVisits" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>新患</label><input id="fNew" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>手術</label><input id="fSurgery" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>健診</label><input id="fCheckup" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>トリミング</label><input id="fGrooming" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field"><label>当日の病院支出（円）</label><input id="fExpense" type="number" min="0" step="1" inputmode="numeric"></div>
+<div class="field wide"><label>院長メモ</label><textarea id="fMemo" placeholder="天気、混雑、印象的な出来事など"></textarea></div>
+<button class="btn primary wide" type="submit">この日のデータを保存</button>
+</form></div>
+<h2 class="section-title">最近の履歴</h2><div id="recentHistory" class="history"></div>
+</section>
+
+<section id="month" class="page">
+<div class="card full"><div class="field"><label>表示月</label><input id="monthPicker" type="month"></div></div>
+<div class="grid">
+<div class="card"><div class="metric-label">月間売上</div><div class="metric" id="mSales">¥0</div></div>
+<div class="card"><div class="metric-label">月間支出</div><div class="metric" id="mExpense">¥0</div></div>
+<div class="card"><div class="metric-label">概算利益</div><div class="metric" id="mProfit">¥0</div></div>
+<div class="card"><div class="metric-label">利益率</div><div class="metric" id="mMargin">0%</div></div>
+<div class="card"><div class="metric-label">来院件数</div><div class="metric" id="mVisits">0件</div></div>
+<div class="card"><div class="metric-label">客単価</div><div class="metric" id="mUnit">¥0</div></div>
+<div class="card"><div class="metric-label">新患</div><div class="metric" id="mNew">0件</div></div>
+<div class="card"><div class="metric-label">営業日数</div><div class="metric" id="mDays">0日</div></div>
+</div>
+<h2 class="section-title">月間履歴</h2><div id="monthHistory" class="history"></div>
+</section>
+
+<section id="year" class="page">
+<div class="card full"><div class="field"><label>表示年</label><select id="yearPicker"></select></div></div>
+<div class="grid"><div class="card"><div class="metric-label">年間売上</div><div class="metric" id="ySales">¥0</div></div><div class="card"><div class="metric-label">年間支出</div><div class="metric" id="yExpense">¥0</div></div><div class="card"><div class="metric-label">年間利益</div><div class="metric" id="yProfit">¥0</div></div><div class="card"><div class="metric-label">年間利益率</div><div class="metric" id="yMargin">0%</div></div></div>
+<h2 class="section-title">月別売上</h2><div class="card"><div id="yearChart" class="bar-chart"></div><div id="yearDetail" class="detailbox">棒グラフをタップすると月別詳細が表示されます。</div></div>
+</section>
+
+<section id="settings" class="page">
+<div class="notice">この3.0は完全新規版です。旧版とは別の保存領域を使用します。固定URLで開くと、同じURL上でデータが維持されます。</div>
+<h2 class="section-title">目標設定</h2><div class="card"><form id="settingsForm" class="form">
+<div class="field"><label>日商目標（円）</label><input id="sDailyGoal" type="number" min="0"></div>
+<div class="field"><label>月商目標（円）</label><input id="sMonthlyGoal" type="number" min="0"></div>
+<div class="field"><label>月間営業日数</label><input id="sBusinessDays" type="number" min="1" max="31"></div>
+<button class="btn primary" type="submit">設定を保存</button></form></div>
+<h2 class="section-title">口座残高</h2><div class="card"><form id="balanceForm" class="form two"><div class="field"><label>日付</label><input id="bDate" type="date"></div><div class="field"><label>残高（円）</label><input id="bAmount" type="number" inputmode="numeric"></div><button class="btn primary wide" type="submit">口座残高を保存</button></form><div id="balanceLatest" class="detailbox">未入力</div></div>
+<h2 class="section-title">バックアップ・復元</h2><div class="card settings-stack">
+<button class="btn secondary" id="exportJson">完全バックアップ（JSON）を書き出す</button>
+<button class="btn secondary" id="importJsonBtn">完全バックアップ（JSON）を読み込む</button>
+<button class="btn secondary" id="exportCsv">日次データ（CSV）を書き出す</button>
+<button class="btn secondary" id="importCsvBtn">日次データ（CSV）を読み込む</button>
+<input class="hidden" id="importJson" type="file" accept="application/json,.json"><input class="hidden" id="importCsv" type="file" accept="text/csv,.csv">
+<button class="btn danger" id="deleteAll">全データを削除</button>
+</div>
+<div class="version">Version 3.1.0 Fresh · 完全新規版</div>
+</section>
+</div><div id="toast" class="toast"></div>
+<script>
+'use strict';
+const STORAGE_KEY='keita-dashboard-v3-single-v310';
+const DEFAULT_STATE={version:3,daily:{},balances:[],settings:{dailyGoal:150000,monthlyGoal:4500000,businessDays:26},updatedAt:null};
+let state=loadState();
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return clone(DEFAULT_STATE);const parsed=JSON.parse(raw);return {version:3,daily:parsed.daily||{},balances:Array.isArray(parsed.balances)?parsed.balances:[],settings:{...DEFAULT_STATE.settings,...(parsed.settings||{})},updatedAt:parsed.updatedAt||null}}catch(e){console.error(e);return clone(DEFAULT_STATE)}}
+function saveState(){state.updatedAt=new Date().toISOString();localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
+function localDateString(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`}
+function yen(n){return '¥'+Math.round(Number(n)||0).toLocaleString('ja-JP')}
+function num(v){const n=Number(v);return Number.isFinite(n)?n:0}
+function pct(n){return `${Math.round((Number(n)||0)*10)/10}%`}
+function marginClass(v){return v>0?'positive':v<0?'negative':'zero'}
+function setMetric(id,text,cls){const el=document.getElementById(id);el.textContent=text;el.classList.remove('positive','negative','zero');if(cls)el.classList.add(cls)}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2400)}
+function emptyDaily(date){return{date,sales:0,visits:0,newPatients:0,surgery:0,checkup:0,grooming:0,expense:0,memo:''}}
+function getDaily(date){return {...emptyDaily(date),...(state.daily[date]||{})}}
+function monthKey(date){return date.slice(0,7)}
+function aggregate(records){return records.reduce((a,r)=>{a.sales+=num(r.sales);a.expense+=num(r.expense);a.visits+=num(r.visits);a.newPatients+=num(r.newPatients);a.surgery+=num(r.surgery);a.checkup+=num(r.checkup);a.grooming+=num(r.grooming);if(num(r.sales)>0||num(r.visits)>0||num(r.expense)>0)a.days++;return a},{sales:0,expense:0,visits:0,newPatients:0,surgery:0,checkup:0,grooming:0,days:0})}
+function recordsForMonth(m){return Object.values(state.daily).filter(r=>monthKey(r.date)===m).sort((a,b)=>b.date.localeCompare(a.date))}
+function renderHeader(){const now=new Date();document.getElementById('datePill').textContent=`${now.getMonth()+1}/${now.getDate()}`}
+function fillDailyForm(date){const r=getDaily(date);fDate.value=date;fSales.value=r.sales||'';fVisits.value=r.visits||'';fNew.value=r.newPatients||'';fSurgery.value=r.surgery||'';fCheckup.value=r.checkup||'';fGrooming.value=r.grooming||'';fExpense.value=r.expense||'';fMemo.value=r.memo||''}
+function renderToday(){const date=localDateString(),r=getDaily(date);setMetric('todaySales',yen(r.sales));setMetric('todayVisits',`${r.visits}件`);setMetric('todayUnit',yen(r.visits?r.sales/r.visits:0));const rate=state.settings.dailyGoal?r.sales/state.settings.dailyGoal*100:0;setMetric('todayGoalRate',pct(rate/1),rate>=100?'positive':rate===0?'zero':'negative');setMetric('todayNew',`${r.newPatients}件`);document.getElementById('todayStatus').textContent=r.sales||r.visits?'保存済み':'本日の数字を入力してください';if(fDate.value!==date&&!state.daily[fDate.value])fillDailyForm(date);renderRecent()}
+function historyHtml(r){return `<div class="history-item"><div class="history-date">${r.date.slice(5).replace('-','/')}</div><div><div class="history-main">来院 ${num(r.visits)}件・新患 ${num(r.newPatients)}件</div><div class="history-sub">手術 ${num(r.surgery)}／健診 ${num(r.checkup)}／トリミング ${num(r.grooming)}${r.memo?`・${escapeHtml(r.memo).slice(0,35)}`:''}</div></div><div class="history-value">${yen(r.sales)}</div></div>`}
+function renderRecent(){const arr=Object.values(state.daily).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);recentHistory.innerHTML=arr.length?arr.map(historyHtml).join(''):'<div class="card">まだ履歴がありません。</div>'}
+function renderMonth(){const m=monthPicker.value||localDateString().slice(0,7),records=recordsForMonth(m),a=aggregate(records),profit=a.sales-a.expense,margin=a.sales?profit/a.sales*100:0;setMetric('mSales',yen(a.sales));setMetric('mExpense',yen(a.expense));setMetric('mProfit',yen(profit),marginClass(profit));setMetric('mMargin',pct(margin),marginClass(margin));setMetric('mVisits',`${a.visits}件`);setMetric('mUnit',yen(a.visits?a.sales/a.visits:0));setMetric('mNew',`${a.newPatients}件`);setMetric('mDays',`${a.days}日`);monthHistory.innerHTML=records.length?records.map(historyHtml).join(''):'<div class="card">この月のデータはありません。</div>'}
+function initYearPicker(){const current=new Date().getFullYear();const years=new Set([current,...Object.keys(state.daily).map(d=>Number(d.slice(0,4)))]);yearPicker.innerHTML=[...years].sort((a,b)=>b-a).map(y=>`<option value="${y}">${y}年</option>`).join('');yearPicker.value=String(current)}
+function monthAggregate(year,m){return aggregate(recordsForMonth(`${year}-${String(m).padStart(2,'0')}`))}
+function renderYear(){const year=Number(yearPicker.value)||new Date().getFullYear();const months=Array.from({length:12},(_,i)=>monthAggregate(year,i+1));const total=months.reduce((a,m)=>{for(const k of Object.keys(a))a[k]+=m[k]||0;return a},{sales:0,expense:0,visits:0,newPatients:0,surgery:0,checkup:0,grooming:0,days:0});const profit=total.sales-total.expense,margin=total.sales?profit/total.sales*100:0;setMetric('ySales',yen(total.sales));setMetric('yExpense',yen(total.expense));setMetric('yProfit',yen(profit),marginClass(profit));setMetric('yMargin',pct(margin),marginClass(margin));const max=Math.max(1,...months.map(m=>m.sales));yearChart.innerHTML=months.map((m,i)=>`<div class="bar-wrap"><button class="bar" aria-label="${i+1}月 ${yen(m.sales)}" data-month="${i+1}" style="height:${Math.max(2,m.sales/max*100)}%"></button><div class="bar-label">${i+1}</div></div>`).join('');yearChart.querySelectorAll('.bar').forEach(b=>b.addEventListener('click',()=>{const i=Number(b.dataset.month)-1,m=months[i],p=m.sales-m.expense,mg=m.sales?p/m.sales*100:0;yearDetail.innerHTML=`<strong>${year}年${i+1}月</strong><br>売上 ${yen(m.sales)}／支出 ${yen(m.expense)}／利益 ${yen(p)}（${pct(mg)}）<br>来院 ${m.visits}件・新患 ${m.newPatients}件・手術 ${m.surgery}件・健診 ${m.checkup}件・トリミング ${m.grooming}件`; }));}
+function renderSettings(){sDailyGoal.value=state.settings.dailyGoal;sMonthlyGoal.value=state.settings.monthlyGoal;sBusinessDays.value=state.settings.businessDays;bDate.value=localDateString();const latest=[...state.balances].sort((a,b)=>b.date.localeCompare(a.date))[0];balanceLatest.textContent=latest?`最新：${latest.date}　${yen(latest.amount)}`:'未入力'}
+function renderAll(){renderHeader();renderToday();renderMonth();renderYear();renderSettings()}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function download(name,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function csvEscape(v){const s=String(v??'');return /[",\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s}
+function parseCsv(text){const rows=[];let row=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(q){if(c==='"'&&n==='"'){cell+='"';i++}else if(c==='"')q=false;else cell+=c}else{if(c==='"')q=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'){row.push(cell.replace(/\r$/,''));rows.push(row);row=[];cell=''}else cell+=c}}if(cell.length||row.length){row.push(cell);rows.push(row)}return rows}
+
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab,.page').forEach(e=>e.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.page).classList.add('active');if(btn.dataset.page==='month')renderMonth();if(btn.dataset.page==='year')renderYear();if(btn.dataset.page==='settings')renderSettings();window.scrollTo({top:0,behavior:'smooth'})}));
+fDate.addEventListener('change',()=>fillDailyForm(fDate.value));
+dailyForm.addEventListener('submit',e=>{e.preventDefault();const date=fDate.value;if(!date)return;state.daily[date]={date,sales:num(fSales.value),visits:num(fVisits.value),newPatients:num(fNew.value),surgery:num(fSurgery.value),checkup:num(fCheckup.value),grooming:num(fGrooming.value),expense:num(fExpense.value),memo:fMemo.value.trim()};saveState();renderAll();toast('この日のデータを保存しました')});
+monthPicker.addEventListener('change',renderMonth);yearPicker.addEventListener('change',renderYear);
+settingsForm.addEventListener('submit',e=>{e.preventDefault();state.settings={dailyGoal:num(sDailyGoal.value),monthlyGoal:num(sMonthlyGoal.value),businessDays:num(sBusinessDays.value)||26};saveState();renderAll();toast('設定を保存しました')});
+balanceForm.addEventListener('submit',e=>{e.preventDefault();const date=bDate.value,amount=num(bAmount.value);if(!date)return;state.balances=state.balances.filter(x=>x.date!==date);state.balances.push({date,amount});saveState();renderSettings();toast('口座残高を保存しました')});
+exportJson.addEventListener('click',()=>download(`keita-dashboard-backup-${localDateString()}.json`,JSON.stringify(state,null,2),'application/json'));
+importJsonBtn.addEventListener('click',()=>importJson.click());importJson.addEventListener('change',async()=>{const f=importJson.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||typeof d!=='object'||!d.daily)throw new Error();state={version:3,daily:d.daily||{},balances:Array.isArray(d.balances)?d.balances:[],settings:{...DEFAULT_STATE.settings,...(d.settings||{})},updatedAt:d.updatedAt||null};saveState();initYearPicker();renderAll();toast('バックアップを復元しました')}catch(e){toast('JSONを読み込めませんでした')}finally{importJson.value=''}});
+exportCsv.addEventListener('click',()=>{const h=['date','sales','visits','newPatients','surgery','checkup','grooming','expense','memo'];const lines=[h.join(','),...Object.values(state.daily).sort((a,b)=>a.date.localeCompare(b.date)).map(r=>h.map(k=>csvEscape(r[k])).join(','))];download(`keita-dashboard-daily-${localDateString()}.csv`,lines.join('\n'),'text/csv;charset=utf-8')});
+importCsvBtn.addEventListener('click',()=>importCsv.click());importCsv.addEventListener('change',async()=>{const f=importCsv.files[0];if(!f)return;try{const rows=parseCsv(await f.text()).filter(r=>r.some(v=>String(v).trim()!==''));if(rows.length<2)throw new Error();const headers=rows[0].map(x=>x.trim());const required=['date','sales'];if(!required.every(h=>headers.includes(h)))throw new Error();let count=0;for(const row of rows.slice(1)){const o={};headers.forEach((h,i)=>o[h]=row[i]??'');if(!/^\d{4}-\d{2}-\d{2}$/.test(o.date))continue;state.daily[o.date]={date:o.date,sales:num(o.sales),visits:num(o.visits),newPatients:num(o.newPatients),surgery:num(o.surgery),checkup:num(o.checkup),grooming:num(o.grooming),expense:num(o.expense),memo:o.memo||''};count++}saveState();initYearPicker();renderAll();toast(`${count}日分を読み込みました`)}catch(e){toast('CSV形式を確認してください')}finally{importCsv.value=''}});
+deleteAll.addEventListener('click',()=>{if(!confirm('3.0の全データを削除します。元に戻せません。よろしいですか？'))return;state=clone(DEFAULT_STATE);saveState();initYearPicker();fillDailyForm(localDateString());renderAll();toast('全データを削除しました')});
+let lastDate=localDateString();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){const now=localDateString();if(now!==lastDate){lastDate=now;fillDailyForm(now)}renderAll()}});setInterval(()=>{const now=localDateString();if(now!==lastDate){lastDate=now;fillDailyForm(now);renderAll()}},60000);
+
+monthPicker.value=localDateString().slice(0,7);fillDailyForm(localDateString());initYearPicker();renderAll();
+</script>
+</body></html>
