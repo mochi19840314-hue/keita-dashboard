@@ -15,8 +15,8 @@ export default defineConfig({
         theme_color: '#059669',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        scope: '/keita-dashboard/',
+        start_url: '/keita-dashboard/',
         icons: [
           {
             src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect fill="%23059669" width="192" height="192"/><text x="96" y="110" font-size="80" fill="white" text-anchor="middle" font-weight="bold">V</text></svg>',
@@ -34,7 +34,7 @@ export default defineConfig({
       }
     })
   ],
-  base: '/',
+  base: '/keita-dashboard/',
   server: {
     port: 5173
   }
